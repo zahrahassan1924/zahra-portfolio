@@ -1,0 +1,34 @@
+---
+interface Props {
+  name: string;
+  src?: string;
+}
+
+const { name, src } = Astro.props;
+
+// Placeholder mark: initials from the company name, skipping "the".
+// e.g. "The Giving Movement" -> "GM", "Eat App" -> "EA", "Tradeling" -> "T"
+const initials = name
+  .split(' ')
+  .filter((word) => word.toLowerCase() !== 'the')
+  .map((word) => word[0])
+  .join('')
+  .slice(0, 3)
+  .toUpperCase();
+---
+
+{
+  src ? (
+    <img
+      src={src}
+      alt={`${name} logo`}
+      class="h-6 sm:h-7 w-auto max-w-[110px] object-contain shrink-0 rounded"
+    />
+  ) : (
+    // [LOGO NEEDED — upload the real mark to /public/logos/<slug>.svg, then
+    // pass it as the `src` prop on <CompanyLogo> instead of this mark.]
+    <span class="logo-placeholder" title={`${name} logo placeholder`}>
+      {initials}
+    </span>
+  )
+}

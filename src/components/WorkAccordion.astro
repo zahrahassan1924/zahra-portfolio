@@ -1,0 +1,124 @@
+---
+import { caseStudies } from '../data/caseStudies';
+import CompanyLogo from './CompanyLogo.astro';
+---
+
+<section id="work" class="py-20 px-6 sm:px-10 scroll-mt-16">
+  <div class="max-w-[880px] mx-auto">
+    <div class="reveal mb-10">
+      <p class="pill-tag text-ink mb-6">Select Work</p>
+      <h2 class="font-serif text-2xl sm:text-3xl leading-tight text-ink max-w-[620px]">
+        Same skill, five different rooms: SaaS, marketplace, and D2C.
+      </h2>
+    </div>
+
+    <div class="reveal">
+      {
+        caseStudies.map((cs) => (
+          <details class="work-row">
+            <summary>
+              <div class="flex items-baseline gap-4 sm:gap-6 flex-1 min-w-0">
+                <span class="font-serif text-sm text-ink/40 shrink-0 pt-1">
+                  {cs.index}
+                </span>
+                <div class="min-w-0">
+                  <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5 mb-1.5">
+                    <CompanyLogo name={cs.company} src={cs.logoSrc} />
+                    <span class="text-xs font-semibold uppercase tracking-wide text-ink/60">
+                      {cs.company}
+                    </span>
+                    <span class="font-serif text-xl sm:text-2xl text-ink">
+                      {cs.metric}
+                    </span>
+                  </div>
+                  <p class="text-sm sm:text-base text-ink/75 max-w-[560px]">
+                    {cs.oneLiner}
+                  </p>
+                </div>
+              </div>
+              <span class="icon-toggle" aria-hidden="true" />
+            </summary>
+
+            <div class="pl-0 sm:pl-[3.25rem] pb-10 pt-1 space-y-6">
+              {cs.externalLink && (
+                <a
+                  href={cs.externalLink.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1.5 text-sm font-semibold text-ink hover:underline"
+                >
+                  {cs.externalLink.label}
+                  <svg
+                    width="13"
+                    height="13"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M7 17 17 7" />
+                    <path d="M7 7h10v10" />
+                  </svg>
+                </a>
+              )}
+
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-wide text-ink mb-2">
+                  Problem
+                </p>
+                <p class="text-ink/80 leading-relaxed max-w-[680px]">{cs.problem}</p>
+              </div>
+
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-wide text-ink mb-2">
+                  Process
+                </p>
+                <ul class="space-y-2.5 max-w-[680px]">
+                  {cs.process.map((step) => (
+                    <li class="text-ink/80 leading-relaxed flex gap-2.5">
+                      <span class="text-ink shrink-0">›</span>
+                      <span>{step}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-wide text-ink mb-2">
+                  Result
+                </p>
+                <p class="font-semibold text-ink leading-relaxed max-w-[680px]">
+                  {cs.result}
+                </p>
+              </div>
+
+              {!cs.hideScreenshot && (
+                cs.images && cs.images.length > 1 ? (
+                  <div
+                    class={`screenshot-gallery max-w-[680px] ${cs.imageOrientation === 'landscape' ? 'landscape' : ''}`}
+                    style={`grid-template-columns: repeat(${cs.images.length}, 1fr);`}
+                  >
+                    {cs.images.map((src) => (
+                      <img src={src} alt={`${cs.company} ${cs.metric} screenshot`} loading="lazy" />
+                    ))}
+                  </div>
+                ) : cs.images && cs.images.length === 1 ? (
+                  <div class="screenshot-single max-w-[680px]">
+                    <img src={cs.images[0]} alt={`${cs.company} ${cs.metric} screenshot`} loading="lazy" />
+                  </div>
+                ) : (
+                  <div class="screenshot-placeholder max-w-[680px]">
+                    [SCREENSHOT NEEDED: {cs.screenshotNote}]
+                  </div>
+                )
+              )}
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

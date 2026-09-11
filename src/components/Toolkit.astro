@@ -1,0 +1,29 @@
+---
+import { toolkit } from '../data/toolkit';
+---
+
+<section id="toolkit" class="py-20 px-6 sm:px-10 scroll-mt-16">
+  <div class="max-w-[880px] mx-auto">
+    <div class="reveal mb-12">
+      <p class="pill-tag text-ink mb-6">Toolkit</p>
+      <h2 class="font-serif text-2xl sm:text-3xl leading-tight text-ink max-w-[600px]">
+        Grouped by muscle, not by tool name.
+      </h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-x-12 gap-y-10">
+      {
+        toolkit.map((group) => (
+          <div class="reveal">
+            <h3 class="font-serif text-lg text-ink mb-3">{group.label}</h3>
+            <div class="flex flex-wrap gap-2">
+              {group.items.map((item) => (
+                <span class={`skill-chip tint-${group.tint}`}>{item}</span>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

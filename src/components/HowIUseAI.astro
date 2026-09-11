@@ -1,0 +1,88 @@
+---
+import ProcessDiagram from './ProcessDiagram.astro';
+import { processSteps, prototypeSteps, shipSteps } from '../data/processSteps';
+---
+
+<section id="how-i-use-ai" class="py-20 px-6 sm:px-10 scroll-mt-16">
+  <div class="max-w-[880px] mx-auto">
+    <div class="reveal mb-12">
+      <p class="pill-tag text-ink mb-6">How I Use AI in Product</p>
+      <h2 class="font-serif text-2xl sm:text-3xl leading-tight text-ink max-w-[600px]">
+        AI in the loop, not in charge.
+      </h2>
+    </div>
+
+    <!-- Flagship: productpriority.app -->
+    <div class="card-hard reveal p-6 sm:p-10 mb-8">
+      <p class="pill-tag text-ink mb-5">Flagship Project</p>
+      <h3 class="font-serif text-2xl sm:text-3xl text-ink mb-4">
+        productpriority.app
+      </h3>
+      <p class="text-ink/80 leading-relaxed max-w-[640px] mb-6">
+        A live agent I built that has a short conversation with you and
+        recommends the right prioritization framework for your specific
+        planning horizon: sprint, quarter, half-year, yearly, or
+        feature-level. Built on Lovable, using an LLM API to reason through
+        the right fit rather than hard-coded rules.
+      </p>
+      <a
+        href="https://productpriority.app/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-hard mb-8"
+      >
+        Try it live
+      </a>
+      <div class="screenshot-single">
+        <img
+          src="/case-studies/productpriority-app.png"
+          alt="productpriority.app product prioritization agent interface"
+          loading="lazy"
+        />
+      </div>
+    </div>
+
+    <!-- Supporting proof point: Ai2 Partner Evaluation Rubric -->
+    <div class="card-hard reveal p-6 sm:p-8 mb-16">
+      <p class="pill-tag text-ink mb-4">Supporting Proof Point</p>
+      <p class="font-serif text-lg sm:text-xl leading-snug text-ink max-w-[640px]">
+        Built a partner-evaluation rubric for the Allen Institute for AI
+        (Ai2), using Claude Code and Lovable, with a defined scoring logic
+        across roughly 18 criteria to help Ai2 identify which vendors and
+        partners to work with, cutting evaluation time by about 20%.
+      </p>
+    </div>
+
+    <!-- Interactive process diagram: Think -> Prototype -> Ship -->
+    <div class="reveal mb-4">
+      <p class="stage-label mb-2">Think</p>
+      <h3 class="font-serif text-xl sm:text-2xl text-ink max-w-[560px]">
+        How I Think Through Problems with AI
+      </h3>
+    </div>
+
+    <ProcessDiagram steps={processSteps} />
+
+    <div class="stage-connector" aria-hidden="true"></div>
+
+    <div class="reveal mb-4">
+      <p class="stage-label">Prototype</p>
+    </div>
+
+    <ProcessDiagram steps={prototypeSteps} />
+
+    <div class="stage-connector" aria-hidden="true"></div>
+
+    <div class="reveal mb-4">
+      <p class="stage-label">Ship</p>
+    </div>
+
+    <ProcessDiagram steps={shipSteps} />
+
+    <!-- Closing pull-quote -->
+    <p class="reveal font-serif italic text-xl sm:text-2xl text-center text-ink mt-44 sm:mt-40">
+      I use AI to argue with my own thinking before anyone else gets the
+      chance to.
+    </p>
+  </div>
+</section>

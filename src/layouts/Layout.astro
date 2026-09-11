@@ -1,0 +1,71 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  // Leave as-is until the domain is confirmed — swap it in then, not before.
+  title = 'Zahra Hassan - Product Manager',
+  description = 'Product Manager across B2B SaaS, B2B marketplace, and D2C e-commerce. Getting close to ambiguity and data to find real friction, then shipping something measured.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,400..600&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--
+      ANALYTICS (Vercel Web Analytics — cookieless, page views + referrer only):
+      1. Deploy this site to Vercel.
+      2. In the Vercel dashboard: Project → Analytics tab → Enable Web Analytics.
+      3. No further code changes needed — the script below starts reporting
+         once analytics is enabled on that project.
+
+      If we end up hosting on Netlify instead of Vercel, delete the script
+      tag below and swap in Plausible instead:
+        1. Create a project at plausible.io for the live domain.
+        2. Replace the script tag with:
+           <script defer data-domain="yourdomain.com" src="https://plausible.io/js/script.js"></script>
+    -->
+    <script defer src="/_vercel/insights/script.js"></script>
+  </head>
+  <body class="font-sans text-[15px] leading-relaxed antialiased">
+    <Nav />
+    <slot />
+    <Footer />
+
+    <script>
+      const revealEls = document.querySelectorAll<HTMLElement>('.reveal');
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          }
+        },
+        { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+      );
+      revealEls.forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>
